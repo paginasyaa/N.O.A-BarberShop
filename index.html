@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.O.A BarberShop - Cortes, Barba y Colorimetría | Montevideo</title>
+    <meta name="description" content="Barbería profesional en el centro de Montevideo. Cortes modernos, perfilado de barba y colorimetría premium. Reservá por WhatsApp: +598 96 900 090">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-black: #1a1a1a;
+            --secondary-black: #2d2d2d;
+            --white: #ffffff;
+            --text-light: #b8b8b8;
+            --shadow: 0 20px 40px rgba(0,0,0,0.5);
+            --glass-bg: rgba(255,255,255,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-light);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%231a1a1a" width="1200" height="800"/><text x="50%" y="50%" font-family="Arial" font-size="100" fill="%23ffffff" text-anchor="middle" dy=".3em">N.O.A BarberShop</text></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary-black);
+            box-shadow: var(--shadow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-black);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--white);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--white);
+        }
+
+        /* About */
+        .about {
+            background: var(--secondary-black);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature i {
+            background: var(--white);
+            color: var(--primary-black);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Services */
+        .services {
+            background: var(--primary-black);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        /* Schedule */
+        .schedule {
+            background: var(--secondary-black);
+            text-align: center;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .schedule-item {
+            background: var(--glass-bg);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .schedule-time {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--primary-black);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--glass-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stars {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--secondary-black);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        #map {
+            height: 300px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border-radius: 15px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            background: linear-gradient(135deg, var(--primary-black), var(--secondary-black));
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-black);
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: var(--glass-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--white);
+            color: var(--primary-black);
+            transform: translateY(-5px);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--primary-black);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero {
+                padding: 0 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">N.O.A BarberShop</a>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#testimonials">Opiniones</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>N.O.A BarberShop</h1>
+            <p>Cortes, barba y colorimetría en pleno centro de Montevideo</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/59896900090?text=Hola!%20Quiero%20reservar%20una%20cita%20en%20N.O.A%20BarberShop" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Reservar por WhatsApp
+                </a>
+                <a href="#services" class="btn btn-secondary">
+                    Ver Servicios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about animate-section">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>En <strong>N.O.A BarberShop</strong> combinamos técnica, estilo y pasión por el detalle. Somos una barbería moderna ubicada en el corazón de Montevideo, donde cada cliente recibe un trato cercano en un ambiente profesional.</p>
+            </div>
+            <div class="about-features">
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span>Equipo profesional certificado</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-handshake"></i>
+                    <span>Ambiente amigable y acogedor</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-star"></i>
+                    <span>Experiencia premium garantizada</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services animate-section">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cut"></i>
+                </div>
+                <h3>Cortes de Cabello</h3>
+                <p>Clásicos y modernos. Fades, degradados y estilos personalizados para cada personalidad.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-hand-holding-medical"></i>
+                </div>
+                <h3>Barba</h3>
+                <p>Perfilado profesional, afeitado clásico y diseño personalizado para un look impecable.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3>Colorimetría</h3>
+                <p>Tintes, decoloraciones, platinados y mechas con técnica profesional y productos premium.</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://wa.me/59896900090?text=Hola!%20Quiero%20consultar%20precios%20de%20sus%20servicios" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.2rem 3rem;" target="_blank">
+                Consultar Precios por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule animate-section">
+        <h2 class="section-title">Horarios</h2>
+        <div class="schedule-grid">
+            <div class="schedule-item">
+                <h3><i class="fas fa-calendar-day"></i> Lunes a Viernes</h3>
+                <p class="schedule-time">10:00 – 19:00</p>
+            </div>
+            <div class="schedule-item">
+                <h3><i class="fas fa-calendar-day"></i> Sábados</h3>
+                <p class="schedule-time">09:00 – 14:00</p>
+            </div>
+            <div class="schedule-item">
+                <h3><i class="fas fa-calendar-times"></i> Domingos</h3>
+                <p class="schedule-time">Cerrado</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials animate-section">
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <div style="font-size: 1.5rem; color: var(--white); font-weight: 600;">
+                ⭐ 4.8 / 5 basado en 168 opiniones
+            </div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">Diego Fernandez<br>Tremendo equipo. Buen ambiente, buena onda y cortes impecables. Se nota cuando alguien labura con ganas y dedicación. Recomiendo 100%</p>
+                <div class="testimonial-author">— Diego Fernandez</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">Manuel Olivera<br>Excelente servicio y muy buen ambiente,unos genios los chicos</p>
+                <div class="testimonial-author">— Manuel Olivera</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">Nahuel Merlo<br>Excelente servicio, los pibes la mejor onda para cortar siempre y andan muy bien todos.</p>
+                <div class="testimonial-author">— Nahuel Merlo</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact animate-section">
+        <h2 class="section-title">Visítanos</h2>
+        <div class="contact-content">
+            <div id="map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.904566396374!2d-56.165399685099!3d-34.906246480465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a2e8b4b4b4b4b4%3A0x1234567890abcdef!2sAv.+18+de+Julio+1534%2C+Montevideo!5e0!3m2!1ses!2suy!4v1699999999999" 
+                    width="100%" 
+                    height="300" 
+                    style="border:0; border-radius: 20px;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Dirección</h4>
+                        <p>Av. 18 de Julio 1534<br>Montevideo, Uruguay</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Teléfono / WhatsApp</h4>
+                        <p><a href="https://wa.me/59896900090" style="color: inherit; text-decoration: none;">+598 96 900 090</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-final animate-section">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <h2 style="font-size: 4rem; margin-bottom: 1rem; color: var(--white);">Reservá tu corte ahora</h2>
+            <a href="https://wa.me/59896900090?text=Hola!%20Quiero%20reservar%20una%20cita%20en%20N.O.A%20BarberShop" class="btn btn-primary" style="font-size: 1.5rem; padding: 1.5rem 4rem;" target="_blank">
+                <i class="fab fa-whatsapp"></i> Agendar por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3 style="color: var(--white); margin-bottom: 1rem;">N.O.A BarberShop</h3>
+                <p>Av. 18 de Julio 1534<br>Montevideo, Uruguay</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Contacto</h4>
+                <p><a href="https://wa.me/59896900090" style="color: inherit;">+598 96 900 090</a></p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Síguenos</h4>
+                <div class="social-links">
+                    <a href="https://instagram.com/n.o.a_barbershop" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com/n.o.a_barbershop" target="_blank"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="border-top: 1px solid var(--text-light); padding-top: 2rem; margin-top: 2rem;">
+            <p>&copy; 2024 N.O.A BarberShop. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/59896900090?text=Hola%20N.O.A%20BarberShop!%20Quiero%20reservar%20una%20cita" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 26, 26, 0.98)';
+                header.style.padding = '0.5rem 0';
+            } else {
+                header.style.background = 'rgba(26, 26, 26, 0.95)';
+                header.style.padding = '1rem 0';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animate-section elements
+        document.querySelectorAll('.animate-section').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // WhatsApp button pulse animation
+        setInterval(() => {
+            const whatsappBtn = document.querySelector('.whatsapp-float');
+            whatsappBtn.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                whatsappBtn.style.transform = 'scale(1)';
+            }, 200);
+        }, 3000);
+    </script>
+</body>
+</html>
